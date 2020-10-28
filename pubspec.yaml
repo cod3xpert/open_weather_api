@@ -1,8 +1,7 @@
 name: open_weather_api
 description: A open weather api plugin for fetching current weather via the OpenWeatherMap API.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/cod3xpert/open_weather_api
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

@@ -1,14 +1,15 @@
 # open_weather_api
 
-A new Flutter package project.
+A new Flutter package project for Fetching weather information.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+```dart
+import 'package:open_weather_api/open_weather_api.dart';
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Add api key
+
+```dart
+openWeather = new OpenWeather("YOUR API KEY");
+```
