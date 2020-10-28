@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  open_weather_api:
+  open_map_weather_api:
     path: ../
 
   # The following adds the Cupertino Icons font to your application.

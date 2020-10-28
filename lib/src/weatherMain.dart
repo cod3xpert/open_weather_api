@@ -1,4 +1,4 @@
-part of open_weather_api;
+part of open_map_weather_api;
 
 class Temperature {
   double _kelvin;

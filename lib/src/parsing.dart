@@ -1,4 +1,4 @@
-part of open_weather_api;
+part of open_map_weather_api;
 
 int _unpackInt(Map<String, dynamic> M, String k) {
   if (M != null) {
