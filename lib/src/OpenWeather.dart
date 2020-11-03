@@ -3,16 +3,15 @@ part of open_map_weather_api;
 class OpenWeather {
   String _apiKey;
   Language language = Language.english;
-  static const String CURRENT_WEATHER = 'weather';
   static const int STATUS_OK = 200;
 
   OpenWeather(this._apiKey, {this.language});
 
   Future<Weather> currentWeatherByLocation(
-      double latitude, double longitude) async {
+      {@required double latitude, @required double longitude}) async {
     try {
       Map<String, dynamic> currentWeather =
-          await _sendRequest(CURRENT_WEATHER, lat: latitude, lon: longitude);
+          await _sendRequest(lat: latitude, lon: longitude);
       return Weather(currentWeather);
     } catch (exception) {
       print(exception);
@@ -20,10 +19,10 @@ class OpenWeather {
     return null;
   }
 
-  Future<Weather> currentWeatherByCityName(String cityName) async {
+  Future<Weather> currentWeatherByCityName({@required String cityName}) async {
     try {
       Map<String, dynamic> currentWeather =
-          await _sendRequest(CURRENT_WEATHER, cityName: cityName);
+          await _sendRequest(cityName: cityName);
       return Weather(currentWeather);
     } catch (exception) {
       print(exception);
@@ -31,9 +30,9 @@ class OpenWeather {
     return null;
   }
 
-  Future<Map<String, dynamic>> _sendRequest(String tag,
+  Future<Map<String, dynamic>> _sendRequest(
       {double lat, double lon, String cityName}) async {
-    String url = _buildUrl(tag, cityName, lat, lon);
+    String url = _buildUrl(cityName, lat, lon);
 
     http.Response response = await http.get(url);
 
@@ -45,8 +44,8 @@ class OpenWeather {
     }
   }
 
-  String _buildUrl(String tag, String cityName, double lat, double lon) {
-    String url = 'https://api.openweathermap.org/data/2.5/' + '$tag?';
+  String _buildUrl(String cityName, double lat, double lon) {
+    String url = 'https://api.openweathermap.org/data/2.5/weather?';
 
     if (cityName != null) {
       url += 'q=$cityName&';

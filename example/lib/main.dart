@@ -33,7 +33,9 @@ class _MyAppState extends State<MyApp> {
       _state = Loading.LOADING;
     });
 
-    Weather weather = await _openWeather.currentWeatherByCityName(_cityName);
+    Weather weather =
+        await _openWeather.currentWeatherByCityName(cityName: _cityName);
+
     setState(() {
       _data = [weather];
       _state = Loading.LOADED;

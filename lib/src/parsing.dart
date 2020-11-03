@@ -5,11 +5,14 @@ int _unpackInt(Map<String, dynamic> M, String k) {
     if (M.containsKey(k)) {
       final val = M[k];
       if (val.runtimeType == String) {
-        return int.parse(M[k]) ?? -1;
+        try {
+          return int.parse(M[k]);
+        } catch (_) {
+          return 0;
+        }
       } else if (val.runtimeType == int) {
         return M[k];
       }
-      return -1;
     }
   }
   return 0;
@@ -18,7 +21,17 @@ int _unpackInt(Map<String, dynamic> M, String k) {
 double _unpackDouble(Map<String, dynamic> M, String k) {
   if (M != null) {
     if (M.containsKey(k)) {
-      return M[k] + 0.0;
+      final val = M[k];
+      if (val.runtimeType == String) {
+        try {
+          return double.parse(M[k]);
+        } catch (_) {
+          return 0.0;
+        }
+      }
+      if (val.runtimeType == int || val.runtimeType == double) {
+        return M[k] + 0.0;
+      }
     }
   }
   return 0.0;
@@ -27,7 +40,10 @@ double _unpackDouble(Map<String, dynamic> M, String k) {
 String _unpackString(Map<String, dynamic> M, String k) {
   if (M != null) {
     if (M.containsKey(k)) {
-      return M[k];
+      final val = M[k];
+      if (val.runtimeType == String) {
+        return M[k];
+      }
     }
   }
   return "";
@@ -36,8 +52,11 @@ String _unpackString(Map<String, dynamic> M, String k) {
 DateTime _unpackDate(Map<String, dynamic> M, String k) {
   if (M != null) {
     if (M.containsKey(k)) {
-      int millis = M[k] * 1000;
-      return DateTime.fromMillisecondsSinceEpoch(millis);
+      final val = M[k];
+      if (val.runtimeType == int || val.runtimeType == double) {
+        int millis = M[k] * 1000;
+        return DateTime.fromMillisecondsSinceEpoch(millis);
+      }
     }
   }
   return null;
@@ -45,5 +64,8 @@ DateTime _unpackDate(Map<String, dynamic> M, String k) {
 
 Temperature _unpackTemperature(Map<String, dynamic> M, String k) {
   double kelvin = _unpackDouble(M, k);
-  return Temperature(kelvin);
+  if (kelvin != 0.0) {
+    return Temperature(kelvin);
+  }
+  return Temperature(273.0);
 }

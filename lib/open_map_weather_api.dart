@@ -2,6 +2,7 @@ library open_map_weather_api;
 
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 part 'package:open_map_weather_api/src/languages.dart';
